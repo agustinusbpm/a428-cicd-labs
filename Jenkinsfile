@@ -3,7 +3,7 @@ node{
         stage('Build') {
             sh 'npm install'
             withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-                sh 'docker build -t bagaspm12/react-app .'
+                sh 'docker build -t $USERNAME/react-app .'
                 sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
                 sh 'docker push bagaspm12/react-app'    
             }
