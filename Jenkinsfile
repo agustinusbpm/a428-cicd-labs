@@ -24,7 +24,7 @@ node{
             //     sh 'ssh -o StrictHostKeyChecking=no -l ec2-user ec2-user@89.207.132.170 docker stop submission'
             //     sh 'ssh -o StrictHostKeyChecking=no -l ec2-user ec2-user@89.207.132.170 docker rm submission'
             //     sh 'ssh -o StrictHostKeyChecking=no -l ec2-user ec2-user@89.207.132.170 docker run -d -p 3000:3000 submission-dicoding/react-app'
-            // Test Add
+            // Test Add Sas
             // }
         }
     }
