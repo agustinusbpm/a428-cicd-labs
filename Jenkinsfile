@@ -1,10 +1,10 @@
 node{
     stage('Build') {
-        docker.image('node:16-buster-slim').inside('-p 3000:3000') {
+        docker.image('node:16-buster-slim').inside('-p 3000:3000 --name submission-dicoding') {
             sh 'npm install' 
         }
         withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-            sh 'docker build -t $USERNAME/submission-react-app .'
+            sh 'docker commit submission-dicoding $USERNAME/submission-react-app'
             sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
             sh 'docker push $USERNAME/submission-react-app'    
         }
