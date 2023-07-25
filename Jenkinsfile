@@ -1,6 +1,6 @@
 node{
     stage('Build') {
-        docker.image('node:16-buster-slim').inside('-p 3000:3000 --name submission-dicoding -dit') {
+        docker.image('node:16-buster-slim').inside('-p 3000:3000 --name submission-dicoding -d') {
             sh 'npm install'
         }
         withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
