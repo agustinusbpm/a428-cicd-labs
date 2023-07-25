@@ -6,7 +6,7 @@ node{
             // sh 'docker commit -p submission-dicoding $USERNAME/submission-react-app'
             // sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
             // sh 'docker push $USERNAME/submission-react-app'    
-        }
+        //}
     }
 
         stage('Test') {
