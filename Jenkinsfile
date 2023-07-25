@@ -4,7 +4,7 @@ node{
             sh 'npm install' 
         }
         withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-            sh 'docker commit submission-dicoding $USERNAME/submission-react-app'
+            sh 'docker commit -p submission-dicoding $USERNAME/submission-react-app'
             sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
             sh 'docker push $USERNAME/submission-react-app'    
         }
