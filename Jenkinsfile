@@ -1,15 +1,14 @@
 node{
-    stage('Build') {
-        docker.image('node:16-buster-slim').inside('-p 3000:3000 --name submission-dicoding') {
+    docker.image('node:16-buster-slim').inside('-p 3000:3000 --name submission-dicoding') {
+        stage('Build') {
             sh 'npm install' 
-        }
-        withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+            withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
             sh 'docker commit -p submission-dicoding $USERNAME/submission-react-app'
             sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
             sh 'docker push $USERNAME/submission-react-app'    
         }
     }
-    docker.image('node:16-buster-slim').inside('-p 3000:3000') {
+
         stage('Test') {
             sh './jenkins/scripts/test.sh'
         }
