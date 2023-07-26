@@ -13,7 +13,16 @@ node{
             sh 'docker push $USERNAME/submission-react-app'    
             }
         }
+        stage('Deploy') {
+            sh docker pull $USERNAME/submission-react-app
+            // sh docker run --rm --name node-agustinus -d -p 30:3000 $USERNAME/submission-react-app
+            docker.image('node-agustinus').inside('-p 30:3000') {
+                sh 'npm start'
+            }
+        }
     }
+
+    
 
     // docker.image('node:16-buster-slim').inside('-p 3000:3000 --name submission-dicoding -dit') {
     //     stage('Test') {
