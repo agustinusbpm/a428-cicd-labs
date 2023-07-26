@@ -10,7 +10,7 @@ node{
             sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
             sh 'docker push $USERNAME/submission-react-app'        
             }
-    docker.image('node:16-buster-slim').inside('-p 3000:3000') {
+    docker.image('bagaspm12/submission-react-app').inside('-p 3000:3000') {
         stage('Test') {
                 sh './jenkins/scripts/test.sh'
         }
@@ -20,7 +20,7 @@ node{
     }
         stage('Deploy') {
             //Deploy Di Local
-            sh 'docker pull bagaspm12/submission-react-app'
+            // sh 'docker pull bagaspm12/submission-react-app'
             docker.image('bagaspm12/submission-react-app').inside('-p 3000:3000') {
                 sh './jenkins/scripts/deliver.sh'
                 sleep(time: 1, unit: 'MINUTES')
