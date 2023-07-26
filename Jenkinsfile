@@ -16,7 +16,7 @@ node{
         stage('Deploy') {
             sh docker pull $USERNAME/submission-react-app
             // sh docker run --rm --name node-agustinus -d -p 30:3000 $USERNAME/submission-react-app
-            docker.image('node-agustinus').inside('-p 30:3000') {
+            docker.image('$USERNAME/submission-react-app').inside('-p 30:3000') {
                 sh 'npm start'
             }
         }
