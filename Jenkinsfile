@@ -11,9 +11,9 @@ node{
             // sh 'docker push $USERNAME/submission-react-app'        
             }
         stage('Deploy') {
-                sh 'docker pull bagaspm12/submission-react-app'
+                // sh 'docker pull bagaspm12/submission-react-app'
                 // sh docker run --rm --name node-agustinus -d -p 30:3000 $USERNAME/submission-react-app
-                docker.image('bagaspm12/submission-react-app').inside('-p 30:3000') {
+                docker.image('bagaspm12/submission-react-app').inside('-p 3000:3000') {
                     sh 'npm start'  
                 }
             }
