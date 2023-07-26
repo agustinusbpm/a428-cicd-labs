@@ -1,11 +1,11 @@
 node{
  stage('Build') {
+    checkout scm
         docker.image('node:16-buster-slim').inside('-p 3000:3000') {
             sh 'npm install'
             archiveArtifacts artifacts: 'node_modules/**', 
                 allowEmptyArchive: true, 
-                fingerprint: true, 
-                onlyIfSuccessful: true
+                fingerprint: true
         }
         withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
             sh 'docker build -t $USERNAME/submission-react-app .'
