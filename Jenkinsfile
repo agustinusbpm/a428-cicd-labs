@@ -13,7 +13,7 @@ node{
         stage('Deploy') {
                 sh 'docker pull bagaspm12/submission-react-app'
                 docker.image('bagaspm12/submission-react-app').inside('-p 3000:3000') {
-                    sh 'npm start &'  
+                    sh './jenkins/scripts/deliver.sh'
                     sleep(time: 1, unit: 'MINUTES')
                     sh './jenkins/scripts/kill.sh'
                 }
