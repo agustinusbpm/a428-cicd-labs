@@ -10,12 +10,14 @@ node{
             sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
             sh 'docker push $USERNAME/submission-react-app'        
             }
+    docker.image('node:16-buster-slim').inside('-p 3000:3000') {
         stage('Test') {
-            sh './jenkins/scripts/test.sh'
+                sh './jenkins/scripts/test.sh'
         }
         stage('Manual Approval') {
             input message: 'Lanjutkan ke tahap Deploy?'
         }
+    }
         stage('Deploy') {
             //Deploy Di Local
             sh 'docker pull bagaspm12/submission-react-app'
@@ -27,10 +29,10 @@ node{
             //Deploy Di AWS EC2
             sshagent(['ec2-key']) {
                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.179.63.68 echo "Testing SSH'
-                // sh 'ssh -o StrictHostKeyChecking=no -l ec2-user@54.179.63.68 docker pull submission-dicoding/react-app'
+                // sh 'ssh -o StrictHostKeyChecking=no -l ec2-user@54.179.63.68 docker pull bagaspm12/submission-react-app'
                 // sh 'ssh -o StrictHostKeyChecking=no -l ec2-user@54.179.63.68 docker stop submission'
                 // sh 'ssh -o StrictHostKeyChecking=no -l ec2-user@54.179.63.68 docker rm submission'
-                // sh 'ssh -o StrictHostKeyChecking=no -l ec2-user@54.179.63.68 docker run -d -p 3000:3000 submission-dicoding/react-app'
+                // sh 'ssh -o StrictHostKeyChecking=no -l ec2-user@54.179.63.68 docker run -d -p 3000:3000 bagaspm12/submission-react-app'
                 }
             }
         }
