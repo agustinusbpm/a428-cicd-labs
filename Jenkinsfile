@@ -1,7 +1,6 @@
 node{
  stage('Build') {
     checkout scm
-    echo "commit-message: ${env.GIT_COMMIT_MESSAGE}"
         docker.image('node:16-buster-slim').inside('-p 3000:3000') {
             sh 'npm install'
             artifacts: 'node_modules/**'
@@ -13,10 +12,12 @@ node{
             }
         }
         stage('Deploy') {
-            sh 'docker pull $USERNAME/submission-react-app'
-            // sh docker run --rm --name node-agustinus -d -p 30:3000 $USERNAME/submission-react-app
-            docker.image('$USERNAME/submission-react-app').inside('-p 30:3000') {
-                sh 'npm start'
+            withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                sh 'docker pull $USERNAME/submission-react-app'
+                // sh docker run --rm --name node-agustinus -d -p 30:3000 $USERNAME/submission-react-app
+                docker.image('$USERNAME/submission-react-app').inside('-p 30:3000') {
+                    sh 'npm start'  
+                }
             }
         }
     }
