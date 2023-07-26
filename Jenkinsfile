@@ -1,19 +1,20 @@
 node{
-    def reactImage = docker.build("$USERNAME/react-app")
-    reactImage.inside {
-         sh 'make test'
+ stage('Build') {
+        docker.image('node:16-buster-slim').inside('-p 3000:3000') {
+            sh 'npm install'
+            archiveArtifacts artifacts: 'node_modules/**', 
+                allowEmptyArchive: true, 
+                fingerprint: true, 
+                onlyIfSuccessful: true
+        }
+        withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+            sh 'docker build -t $USERNAME/submission-react-app .'
+            sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
+            sh 'docker push $USERNAME/submission-react-app'    
+            }
+        }
     }
-}
-    // stage('Build') {
-    //     docker.image('node:16-buster-slim').inside('-p 3000:3000') {
-    //         sh 'npm install'
-    //     withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-    //         docker.build('submission-dicoding', '.').push()
-    //         sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
-    //         sh 'docker push $USERNAME/submission-react-app'    
-    //         }
-    //     }
-    // }
+
     // docker.image('node:16-buster-slim').inside('-p 3000:3000 --name submission-dicoding -dit') {
     //     stage('Test') {
     //         sh './jenkins/scripts/test.sh'

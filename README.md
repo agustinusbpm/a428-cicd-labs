@@ -20,9 +20,9 @@ the "Test" and "Deliver" stages of your Pipeline.
     a. Mengganti port docker container untuk menjalankan `Grafana` dari `3030` menjadi `3031`.
     b. Mengubah port docker container untuk menjalankan `Prometheus` dari `9090` menjadi `9091`.
     c. Melakukan Deployment Ke Cloud Provider dengan mekanisme `Jenkins, Prometheus, dan Grafana: Localhost; Aplikasi: Amazon EC2.`
-3. IP Address Publik yang digunakan aplikasi di Amazon EC2 adalah `12.31.12.44`
+3. IP Address Publik yang digunakan aplikasi di Amazon EC2 adalah `54.179.63.68` public dns `ec2-54-179-63-68.ap-southeast-1.compute.amazonaws.com`
 4. Langkah-langkah dalam deployment ke cloud provider adalah:
-    a. Build Image di Docker localhost ketika menjalankan pipeline stage `Build`
+    a. Build Image di Docker localhost menggunakan `dockerfile` ketika menjalankan pipeline stage `Build`
     b. Push Image ke Registry Docker hub.
     c. Pull Image dari Registry Docker Hub ke AWS EC2 pada stage `Deploy` setelah proses deploy di lokal selama 1 menit.
     d. Pada AWS EC2, terinstall nginx yang berguna untuk reverse proxy dari port 3000 ke port 80.
