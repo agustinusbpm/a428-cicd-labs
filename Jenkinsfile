@@ -9,7 +9,7 @@ node{
             // sh 'docker build -t $USERNAME/submission-react-app .'
             // sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
             // sh 'docker push $USERNAME/submission-react-app'        
-            // }
+            }
         stage('Deploy') {
                 sh 'docker pull bagaspm12/submission-react-app'
                 // sh docker run --rm --name node-agustinus -d -p 30:3000 $USERNAME/submission-react-app
