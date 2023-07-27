@@ -1,7 +1,6 @@
 node{
     // withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
     //     stage('Build') {
-    checkout scm
     //         docker.image('node:16-buster-slim').inside('-p 3000:3000') {
     //             sh 'npm install'
     //             artifacts: 'node_modules/**'
@@ -19,6 +18,7 @@ node{
     //     }
     // }
         stage('Deploy') {
+    checkout scm
             //Deploy Di Local
             // sh 'docker pull bagaspm12/submission-react-app'
             // docker.image('bagaspm12/submission-react-app').inside('-p 3000:3000') {
@@ -28,7 +28,7 @@ node{
             //     }
             //Deploy Di AWS EC2
             withCredentials([sshUserPrivateKey(credentialsId: 'ec2-key', keyFileVariable: 'private-key', usernameVariable: 'ec2-user')]) {
-                sh 'ssh -i $private-key StrictHostKeyChecking=no $ec2-user@54.179.63.68 echo "Testing SSH'
+                sh 'ssh -i $private-key StrictHostKeyChecking=no $ec2-user@54.179.63.68 echo "Testing SSH"'
             }
             // sshagent(['ec2-key']) {
             //     
