@@ -46,4 +46,3 @@ the "Test" and "Deliver" stages of your Pipeline.
     * [x] Lampirkan juga screenshot yang menampilkan menu Containers pada Docker Desktop atau output dari dari perintah “docker ps” di Terminal.
 3. Logs
     * [ ] Lampirkan berkas log.txt yang Anda unduh dari halaman Artifacts pada Blue Ocean.
-
