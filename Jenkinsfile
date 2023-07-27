@@ -27,8 +27,9 @@ node{
             //     sh './jenkins/scripts/kill.sh'
             //     }
             //Deploy Di AWS EC2
-            withCredentials([sshUserPrivateKey(credentialsId: 'ec2-key', keyFileVariable: 'private-key', usernameVariable: 'ec2-user')]) {
-                sh 'ssh -i \"$private-key\" -o StrictHostKeyChecking=no $ec2-user@54.179.63.68 echo "Testing SSH"'
+            withCredentials([sshUserPrivateKey(credentialsId: 'ec2-key', keyFileVariable: 'PRIVATE', usernameVariable: 'PASSWORD')]) {
+                sh "echo $PRIVATE"
+                // sh 'ssh -i \"$private-key\" -o StrictHostKeyChecking=no $ec2-user@54.179.63.68 echo "Testing SSH"'
             }
             // sshagent(['ec2-key']) {
             //     
