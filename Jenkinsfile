@@ -28,8 +28,8 @@ node{
             //Deploy Di AWS EC2
             withCredentials([sshUserPrivateKey(credentialsId: 'ec2-key', keyFileVariable: 'PRIVATE', usernameVariable: 'USER')]) {
                 sh 'ssh -i $PRIVATE -o StrictHostKeyChecking=no $USER@54.179.63.68 docker pull bagaspm12/submission-react-app'
-                sh 'ssh -i $PRIVATE -o StrictHostKeyChecking=no $USER@54.179.63.68 docker stop submission-react-app && docker rm submission-react-app'
-                sh 'ssh -i $PRIVATE -o StrictHostKeyChecking=no $USER@54.179.63.68 docker run -d --name submission-react-app -p 3000:3000 bagaspm12/submission-react-app'
+                sh 'ssh -i $PRIVATE -o StrictHostKeyChecking=no $USER@54.179.63.68 docker stop submission-react-app'
+                sh 'ssh -i $PRIVATE -o StrictHostKeyChecking=no $USER@54.179.63.68 docker run --rm -d --name submission-react-app -p 3000:3000 bagaspm12/submission-react-app'
                 }
             }
         }

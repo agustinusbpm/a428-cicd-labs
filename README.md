@@ -17,17 +17,18 @@ the "Test" and "Deliver" stages of your Pipeline.
 
 1. Link Github Repository submission adalah `https://github.com/agustinusbpm/a428-cicd-labs/tree/react-app` dengan menggunakan aplikasi `React App`
 2. IP Address Publik yang digunakan aplikasi di Amazon EC2 adalah `54.179.63.68`
-3. Saran yang diterapkan
+3. Template Grafana Dashboard yang digunakan adalah Jenkins: `Performance and Job Details` dengan id `16586`
+4. Saran yang diterapkan
     * Mengganti port docker container untuk menjalankan `Grafana` dari `3030` menjadi `3031`.
     * Mengubah port docker container untuk menjalankan `Prometheus` dari `9090` menjadi `9091`.
     * Melakukan Deployment Ke Cloud Provider dengan mekanisme `Jenkins, Prometheus, dan Grafana: Localhost; Aplikasi: Amazon EC2.`
-4. IP Address Publik yang digunakan aplikasi di Amazon EC2 adalah `54.179.63.68` public dns `ec2-54-179-63-68.ap-southeast-1.compute.amazonaws.com`
-5. Langkah-langkah dalam deployment ke cloud provider adalah:
+5. IP Address Publik yang digunakan aplikasi di Amazon EC2 adalah `54.179.63.68` public dns `ec2-54-179-63-68.ap-southeast-1.compute.amazonaws.com`
+6. Langkah-langkah dalam deployment ke cloud provider adalah:
     * Build Image di Docker localhost menggunakan `Dockerfile` ketika menjalankan pipeline stage `Build`
     * Push Image ke Registry Docker hub dengan image `bagaspm12/submission-react-app`.
     * Pull Image dari Registry Docker Hub ke AWS EC2 pada stage `Deploy` setelah proses deploy di lokal selama 1 menit.
     * Pada AWS EC2, terinstall nginx yang berguna untuk reverse proxy dari port 3000 ke port 80.
-6. Referensi yang diambil adalah
+7. Referensi yang diambil adalah
     * https://www.dicoding.com/academies/428/discussions/267450
     * https://jennykibiri.hashnode.dev/jenkins-pipeline-to-build-and-deploy-a-frontend-application-on-aws-ec2
 
