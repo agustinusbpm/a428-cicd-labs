@@ -24,7 +24,7 @@ the "Test" and "Deliver" stages of your Pipeline.
 4. IP Address Publik yang digunakan aplikasi di Amazon EC2 adalah `54.179.63.68` public dns `ec2-54-179-63-68.ap-southeast-1.compute.amazonaws.com`
 5. Langkah-langkah dalam deployment ke cloud provider adalah:
     * Build Image di Docker localhost menggunakan `Dockerfile` ketika menjalankan pipeline stage `Build`
-    * Push Image ke Registry Docker hub.
+    * Push Image ke Registry Docker hub dengan image `bagaspm12/submission-react-app`.
     * Pull Image dari Registry Docker Hub ke AWS EC2 pada stage `Deploy` setelah proses deploy di lokal selama 1 menit.
     * Pada AWS EC2, terinstall nginx yang berguna untuk reverse proxy dari port 3000 ke port 80.
 6. Referensi yang diambil adalah
