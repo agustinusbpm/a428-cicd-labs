@@ -1,7 +1,7 @@
 node{
     // withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
     //     stage('Build') {
-    //         checkout scm
+    checkout scm
     //         docker.image('node:16-buster-slim').inside('-p 3000:3000') {
     //             sh 'npm install'
     //             artifacts: 'node_modules/**'
@@ -39,4 +39,4 @@ node{
             //     }
             }
         }
-    }
+    // }
