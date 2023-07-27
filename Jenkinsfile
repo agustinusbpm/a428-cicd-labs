@@ -29,7 +29,7 @@ node{
             //Deploy Di AWS EC2
             withCredentials([sshUserPrivateKey(credentialsId: 'ec2-key', keyFileVariable: 'PRIVATE', usernameVariable: 'USER')]) {
                 sh "echo $PRIVATE , $USER"
-                // sh 'ssh -i \"$private-key\" -o StrictHostKeyChecking=no $ec2-user@54.179.63.68 echo "Testing SSH"'
+                sh 'ssh -i $PRIVATE -o StrictHostKeyChecking=no $USER@54.179.63.68 echo "Testing SSH"'
             }
             // sshagent(['ec2-key']) {
             //     
